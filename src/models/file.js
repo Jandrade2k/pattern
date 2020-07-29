@@ -11,5 +11,14 @@ const file = new mongoose.Schema({
     },
 }, {
     timestamps: true,
-    toObject: {}
+    toObject: {virtuals: true},
+    toJSON: {virtuals: true}
 })
+
+file.virtual('url').get(function() {
+    const url = process.env.url || 'http://localhost:1650'
+
+    return `${url}/files/${encodedURIComponent(this.path)}`
+})
+
+module.exports = mongoose.model('file', file)

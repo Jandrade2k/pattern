@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
-const { Socket } = require('dgram');
-const { json } = require('express');
+
 
 const app = express();
 app.use(cors());
@@ -30,4 +30,4 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')))
 
 app.use(require('./routes'));
 
-server.listen(3333);
+server.listen(process.env.PORT || 1605);
